@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2012 Angry Beards - Vote Now</title>
+    <link rel="stylesheet" href="/css/master.css" type="text/css" media="screen" charset="utf-8">
+  </head>
+  <body>
+    <div id="container">
+    </div>
+
+    <script type="text/template" id="beard-template">
+      <div id="beard-{{name}}" data-beard="{{name}}">
+        <div class="vote">
+          <button class="punch" data-cast="look" data-beard="{{name}}">Best Looking Beard</button>
+          <button class="punch" data-cast="ceo" data-beard="{{name}}">Best CEO Beard</button>
+          <button class="punch" data-cast="try" data-beard="{{name}}">Best Try Beard</button>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/mustache.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      function addBeard(beard) {
+        var template = $("#beard-template").text();
+        $("#container").append(Mustache.to_html(template, {"name": beard}));
+        $("#beard-" + beard).css("background-image", "url(/images/" + beard + "-300.jpg)");
+      }
+
+      (function () {
+        var beard, beards = ["charles", "cody", "greg", "gus", "josh", "knucklebunny", "matt", "leif", "ryan"];
+        for (var i=0, n=beards.length; i<n; i++) {
+          addBeard(beards[i]);
+        }
+
+        $("button").click(function () {
+          var $this = $(this), cast = $this.data("cast"), name = $this.data("beard");
+          console.log("%o-%o", cast, name);
+          $("button[data-cast=" + cast + "]").hide();
+        });
+      }());
+    </script>
+  </body>
+</html>
+
