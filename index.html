@@ -37,6 +37,7 @@
           var $this = $(this), cast = $this.data("cast"), name = $this.data("beard");
           console.log("%o-%o", cast, name);
           $("button[data-cast=" + cast + "]").hide();
+          (new Image()).src = "/images/vote.gif?cast=" + cast + "&beard=" + name;
         });
       }());
     </script>
