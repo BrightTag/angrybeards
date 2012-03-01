@@ -13,9 +13,10 @@
     <script type="text/template" id="beard-template">
       <div id="beard-{{name}}" data-beard="{{name}}">
         <div class="vote">
-          <button class="punch" data-cast="look" data-beard="{{name}}">Best Looking Beard</button>
-          <button class="punch" data-cast="ceo" data-beard="{{name}}">Best CEO Beard</button>
-          <button class="punch" data-cast="try" data-beard="{{name}}">Best Try Beard</button>
+          <button class="punch" data-cast="look" data-beard="{{name}}">Best Looking</button>
+          <button class="punch" data-cast="try" data-beard="{{name}}">Best Try</button>
+          <button class="punch" data-cast="ceo" data-beard="{{name}}">Best CEO</button>
+          <button class="punch" data-cast="neck" data-beard="{{name}}">Best Neck Strap</button>
         </div>
       </div>
     </script>
@@ -29,8 +30,17 @@
         $("#beard-" + beard).css("background-image", "url(/images/" + beard + "-300.jpg)");
       }
 
+      function shuffle(a) {
+        for (var i=a.length; --i;) {
+          var j = parseInt(Math.random() * 100) % i, tmp = a[i];
+          a[i] = a[j], a[j] = tmp;
+        }
+        return a;
+      }
+
       (function () {
-        var beard, beards = ["charles", "cody", "greg", "gus", "josh", "knucklebunny", "matt", "leif", "ryan"];
+        var beard, beards = shuffle(["charles", "cody", "greg", "gus", "josh", "knucklebunny", "matt", "leif", "ryan"]);
+        
         for (var i=0, n=beards.length; i<n; i++) {
           addBeard(beards[i]);
         }
